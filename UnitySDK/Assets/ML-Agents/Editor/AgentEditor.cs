@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace MLAgents
@@ -29,7 +29,6 @@ namespace MLAgents
                 "agentParameters.agentCameras");
             var renderTextures = serializedAgent.FindProperty(
                 "agentParameters.agentRenderTextures");
-            var sensors = serializedAgent.FindProperty("agentParameters.sensors");
 
             EditorGUILayout.PropertyField(brain);
 
@@ -37,8 +36,6 @@ namespace MLAgents
             {
                 EditorGUILayout.HelpBox("Brain visual observations created by first getting all cameras then all render textures.", MessageType.Info);
             }
-
-            // Cameras
 
             EditorGUILayout.LabelField("Agent Cameras");
             for (var i = 0; i < cameras.arraySize; i++)
@@ -61,8 +58,6 @@ namespace MLAgents
 
             EditorGUILayout.EndHorizontal();
 
-            // RenderTextures
-
             EditorGUILayout.LabelField("Agent RenderTextures");
             for (var i = 0; i < renderTextures.arraySize; i++)
             {
@@ -84,30 +79,6 @@ namespace MLAgents
 
             EditorGUILayout.EndHorizontal();
 
-            // ISensor
-
-            EditorGUILayout.LabelField("Agent Sensors");
-            for (var i = 0; i < sensors.arraySize; i++)
-            {
-                EditorGUILayout.PropertyField(
-                    sensors.GetArrayElementAtIndex(i),
-                    new GUIContent("Sensor " + (i + 1) + ": "));
-            }
-
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Add Sensor", EditorStyles.miniButton))
-            {
-                sensors.arraySize++;
-            }
-
-            if (GUILayout.Button("Remove Sensor", EditorStyles.miniButton))
-            {
-                sensors.arraySize--;
-            }
-
-            EditorGUILayout.EndHorizontal();
-
-            //
 
             EditorGUILayout.PropertyField(
                 maxSteps,
