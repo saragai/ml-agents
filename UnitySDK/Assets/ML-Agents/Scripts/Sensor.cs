@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Google.Protobuf;
 using MLAgents.CommunicatorObjects;
@@ -23,7 +24,7 @@ namespace MLAgents
 
     // Maps 1:1 with Agent.AgentParameters.agentCameras
     // TBD should this and RenderTextureSensor share a common class? Similar implementations.
-    public class CameraSensor : ISensor
+    public class SampleCameraSensor : ISensor
     {
         private Camera m_Camera;
         public int Width;
@@ -66,7 +67,7 @@ namespace MLAgents
     // An example from the Ball3DAgent is below
     // Implementations have to implement GetObservation() which creates the Observation type.
     // TBD - use a delegate instead on abstract method
-    public abstract class StructSensor<T> : ISensor
+    public abstract class StructSensor<T> : ISensor where T : struct
     {
         public int[] GetShape()
         {

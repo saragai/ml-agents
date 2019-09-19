@@ -24,6 +24,45 @@ public class Ball3DAgent : Agent
         AddVectorObs(m_BallRb.velocity);
     }
 
+    struct Ball3DObservation
+    {
+        public float rotationZ;
+        public float rotationX;
+        public Vector3 positionOffset;
+        public Vector3 ballRbVelocity;
+    }
+
+    //
+    // Approach 1 - This gets passed to StructSensor as a delegate
+    //
+    Ball3DObservation GetObservation()
+    {
+        Ball3DObservation obs;
+        var t = gameObject.transform;
+        obs.rotationZ = t.rotation.z;
+        obs.rotationX = t.rotation.x;
+        obs.positionOffset = ball.transform.position - t.position;
+        obs.ballRbVelocity = m_BallRb.velocity;
+        return obs;
+    }
+
+    //
+    // Approach 2 - attribute-based
+    // It's up to the agent to fill this in, and will be read each time.
+    //
+    //[Observation]
+    Ball3DObservation m_Observation;
+
+    //
+    // Approach 3 - attribute-based properties
+    //[Observation]
+    public Vector3 RigidBodyOffset
+    {
+        get { return ball.transform.position - gameObject.transform.position; }
+    }
+    // same for rotation, velocity.
+    //
+
     public override void AgentAction(float[] vectorAction, string textAction)
     {
         if (brain.brainParameters.vectorActionSpaceType == SpaceType.Continuous)

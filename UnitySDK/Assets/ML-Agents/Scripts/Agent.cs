@@ -169,6 +169,7 @@ namespace MLAgents
         /// </summary>
         public List<RenderTexture> agentRenderTextures = new List<RenderTexture>();
 
+        public List<CameraSensor> sensors = new List<CameraSensor>();
 
         /// <summary>
         /// The maximum number of steps the agent takes before being done.
