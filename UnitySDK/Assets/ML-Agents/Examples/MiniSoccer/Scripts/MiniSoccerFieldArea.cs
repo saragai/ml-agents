@@ -112,7 +112,7 @@ public class MiniSoccerFieldArea : MonoBehaviour
         }
     }
 
-    public Vector3 GetRandomSpawnPos(AgentMiniSoccer.AgentRole role, AgentMiniSoccer.Team team)
+    public Vector3 GetRandomSpawnPos(AgentMiniSoccer.AgentRole role, AgentMiniSoccer.Team team, float scale)
     {
         var xOffset = 0f;
         if (role == AgentMiniSoccer.AgentRole.Goalie)
@@ -127,10 +127,14 @@ public class MiniSoccerFieldArea : MonoBehaviour
         {
             xOffset = xOffset * -1f;
         }
-        var randomSpawnPos = ground.transform.position +
-            new Vector3(xOffset, 0f, 0f)
+
+        Vector3 offset = new Vector3(xOffset, 0f, 0f)
             + (Random.insideUnitSphere * 2);
-        randomSpawnPos.y = ground.transform.position.y + 2;
+
+        var randomSpawnPos = ground.transform.position + offset * scale;
+
+        randomSpawnPos.y = ground.transform.position.y + 2 * scale;
+
         return randomSpawnPos;
     }
 

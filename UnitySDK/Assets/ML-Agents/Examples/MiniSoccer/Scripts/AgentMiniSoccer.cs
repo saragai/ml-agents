@@ -175,7 +175,14 @@ public class AgentMiniSoccer : Agent
             transform.rotation = Quaternion.Euler(0f, 90f, 0f);
         }
 
-        transform.position = area.GetRandomSpawnPos(agentRole, team);
+        float scale = m_Academy.resetParameters["stage_scale"];
+        transform.position = area.GetRandomSpawnPos(agentRole, team, scale);
+
+        Vector3 scaleVector = 0.01f * scale * Vector3.one;
+        scaleVector.y = 0.01f;
+
+        area.ground.transform.localScale = scaleVector;
+
         agentRigitBody.velocity = Vector3.zero;
         agentRigitBody.angularVelocity = Vector3.zero;
 

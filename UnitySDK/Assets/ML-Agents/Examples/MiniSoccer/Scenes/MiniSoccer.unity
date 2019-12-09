@@ -851,6 +851,8 @@ MonoBehaviour:
       value: 0.015
     - key: gravity
       value: 9.81
+    - key: stage_scale
+      value: 0.5
   purpleMaterial: {fileID: 2100000, guid: b0da1813c36914e678ba57f2790424e1, type: 2}
   blueMaterial: {fileID: 2100000, guid: c9fa44c2c3f8ce74ca39a3355ea42631, type: 2}
   gravityMultiplier: 1
